@@ -8,12 +8,14 @@ class CardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth=MediaQuery.of(context).size.width;
+    double screenHeight=MediaQuery.of(context).size.height;
     return GridView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: 10,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          childAspectRatio: 0.8,
+          childAspectRatio: screenWidth/screenHeight,
           mainAxisSpacing: 9.0,
           crossAxisSpacing: 6.0,
           maxCrossAxisExtent: 200,
