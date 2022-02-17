@@ -7,6 +7,7 @@ import 'package:ecommerce/view/screen/favorites_screen.dart';
 import 'package:ecommerce/view/screen/main_screen.dart';
 import 'package:ecommerce/view/screen/welcome_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import '../logic/bindings/product_binding.dart';
 import '../view/screen/category_screen.dart';
 import '../view/screen/settings_screen.dart';
 
@@ -60,6 +61,7 @@ class AppRoutes{
       bindings:[
         AuthBinding(),
         MainBinding(),
+        ProductBinding(),
       ] ,
     ),
 

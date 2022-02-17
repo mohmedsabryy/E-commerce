@@ -21,7 +21,7 @@ class ContainerUnder extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width:double.infinity ,
-        height: 150,
+        height: 100,
         decoration: BoxDecoration(
             color:Get.isDarkMode? pinkClr:mainColor,
             borderRadius:const BorderRadius.only(

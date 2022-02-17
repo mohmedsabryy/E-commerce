@@ -19,11 +19,12 @@ class CheckWidget extends StatelessWidget {
               controller.CheckBox();
             },
             child: Container(
-              height: 35,
-              width: 35,
+              height: 25,
+              width: 25,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10),
+
+                borderRadius: BorderRadius.circular(5),
               ),
               child: controller.isCheckBox
                   ? Get.isDarkMode
@@ -36,7 +37,7 @@ class CheckWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: 10,
+            width: 10
           ),
           Row(
             children: [

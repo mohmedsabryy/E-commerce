@@ -1,32 +1,49 @@
+import 'package:ecommerce/logic/controllers/product_controller.dart';
+import 'package:ecommerce/models/products_models.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../utils/theme.dart';
 import '../text_utils.dart';
 
 class CardItems extends StatelessWidget {
-  const CardItems({Key? key}) : super(key: key);
+   CardItems({Key? key}) : super(key: key);
+
+  final controller = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
     double screenWidth=MediaQuery.of(context).size.width;
     double screenHeight=MediaQuery.of(context).size.height;
-    return GridView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 10,
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          childAspectRatio: screenWidth/screenHeight,
-          mainAxisSpacing: 9.0,
-          crossAxisSpacing: 6.0,
-          maxCrossAxisExtent: 200,
-        ),
-        itemBuilder: (context,index){
-        return buildCardItems();
-        },
-    );
+    return Obx((){
+      if(controller.isLoading.value){
+        return  Center(child: CircularProgressIndicator(
+          color: Get.isDarkMode? pinkClr: mainColor,
+        ));
+      }else {
+        return  Expanded(
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: controller.products.length,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              childAspectRatio: screenWidth/screenHeight,
+              mainAxisSpacing: 9.0,
+              crossAxisSpacing: 6.0,
+              maxCrossAxisExtent: 200,
+            ),
+            itemBuilder: (context,index){
+              return buildCardItems(product: controller.products[index]);
+            },
+          ),
+        );
+      }
+    });
   }
 
-  Widget buildCardItems(){
+  Widget buildCardItems({
+  required ProductModel product,
+}){
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
@@ -71,7 +88,7 @@ class CardItems extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Image.network(
-                  'https://media.istockphoto.com/photos/athletic-muscular-young-man-in-sports-outfit-is-preparing-to-start-picture-id1262702644?k=20&m=1262702644&s=612x612&w=0&h=VwVbXXLMyHtX5imHEZpfpsUxqYlFq-T19Qtb6HXvF1o=',
+              product.productImage,
                 fit: BoxFit.cover,
               ),
             ),
@@ -84,8 +101,9 @@ class CardItems extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //price
                   Text(
-                    '\$15',
+                    '\$${product.productPrice}',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold
@@ -106,8 +124,9 @@ class CardItems extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          // rate
                           TextUtils(
-                            text: '4.7',
+                            text: product.productRate,
                             fontsize: 13,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
