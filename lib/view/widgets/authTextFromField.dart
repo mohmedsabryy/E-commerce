@@ -25,7 +25,9 @@ final String hintText ;
       obscureText: obscureText,
       cursorColor: Colors.black,
       keyboardType: TextInputType.text,
-      validator: (value)=>validator() ,
+      validator: (value){
+        return validator(value);
+      },
       decoration: InputDecoration(
         fillColor: Colors.grey.shade200 ,
         prefixIcon:prefixIcon ,

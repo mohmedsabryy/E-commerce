@@ -19,6 +19,11 @@ class AuthController extends GetxController{
      update() ;
    }
 
+    bool isLodaing=false;
+   void loading(bool load){
+     isLodaing =load;
+     update();
+   }
 
 
 }

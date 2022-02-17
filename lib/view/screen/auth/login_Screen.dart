@@ -1,14 +1,12 @@
 import 'package:ecommerce/logic/controllers/auth_controller.dart';
-import 'package:ecommerce/routes/routes.dart';
 import 'package:ecommerce/utils/my_string.dart';
 import 'package:ecommerce/utils/theme.dart';
 import 'package:ecommerce/view/screen/auth/forgot_password_screen.dart';
+import 'package:ecommerce/view/screen/auth/login_data.dart';
 import 'package:ecommerce/view/screen/auth/singup_screen.dart';
 import 'package:ecommerce/view/widgets/authButtom.dart';
 import 'package:ecommerce/view/widgets/authTextFromField.dart';
-import 'package:ecommerce/view/widgets/checkWidget.dart';
 import 'package:ecommerce/view/widgets/container_under.dart';
-
 import 'package:ecommerce/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,6 +22,14 @@ class LoginScreen extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void login() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      bool response =
+          await userLogin(emailController.text, passwordController.text);
+      controller.loading(response);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +71,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-
+                    SizedBox(height: 50),
                     // email
                     AuthTextFromField(
                       controller: emailController,
@@ -90,9 +93,7 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 20),
                     //password
                     GetBuilder<AuthController>(builder: (_) {
                       return AuthTextFromField(
@@ -101,10 +102,10 @@ class LoginScreen extends StatelessWidget {
                         obscureText: controller.isVisibility ? false : true,
                         prefixIcon: Get.isDarkMode
                             ? const Icon(
-                          Icons.lock,
-                          color: pinkClr,
-                          size: 30,
-                        )
+                                Icons.lock,
+                                color: pinkClr,
+                                size: 30,
+                              )
                             : Image.asset('assets/images/lock.png'),
                         suffixIcon: IconButton(
                           onPressed: () {
@@ -124,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                         hintText: 'Password ',
 
                         validator: (value) {
-                          if (value.toString().length <= 6) {
+                          if (value.toString().length <= 5) {
                             return 'Password should be longer or equal  to 6 characters';
                           } else {
                             return null;
@@ -132,9 +133,7 @@ class LoginScreen extends StatelessWidget {
                         },
                       );
                     }),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 20),
 
                     Align(
                       alignment: Alignment.centerRight,
@@ -151,21 +150,41 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    SizedBox(height: 40),
 
                     // buttom Login up
+                    GetBuilder<AuthController>(
+                      builder: (_) => controller.isLodaing
+                          ? const CircularProgressIndicator()
+                          : AuthButtom(
+                        text: "LOG IN",
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            login();
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            //SizedBox(height: 70),
 
-                    AuthButtom(
-                      text: "LOG IN",
-                      onPressed: () {
-                        Get.toNamed(Routes.mainScreen);
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+            ContainerUnder(
+              onPressed: () {
+                Get.off(SignUpScreen());
+              },
+              text: "Don't have an account ? ",
+              textType: "Sign Up ",
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+//SizedBox(height: 30),
+/*
                     TextUtils(
                       text: "OR",
                       fontsize: 18,
@@ -173,7 +192,7 @@ class LoginScreen extends StatelessWidget {
                       color: Get.isDarkMode ? Colors.white : Colors.black,
                       underline: TextDecoration.none,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 30,
                     ),
                     Row(
@@ -192,27 +211,6 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 70,
-            ),
-            ContainerUnder(
-              ///
-              onPressed: () {
-                Get.off(SignUpScreen());
-              },
-              text: "Don't have an account ? ",
-              textType: "Sign Up ",
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+                     */
+//SizedBox(height: 40),
 }
