@@ -11,18 +11,6 @@ import '../../utils/config.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
-  void logout(){
-    prefs.remove(userId);
-    prefs.remove(userName);
-    prefs.remove(userPhone);
-    prefs.remove(userEmail);
-    prefs.remove(userImage);
-
-    prefs.clear();
-
-    Get.offNamed(Routes.loginScreen);
-    print("log out done ");
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

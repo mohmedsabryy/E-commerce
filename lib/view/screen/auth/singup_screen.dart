@@ -7,6 +7,7 @@ import 'package:ecommerce/view/widgets/authTextFromField.dart';
 import 'package:ecommerce/view/widgets/checkWidget.dart';
 import 'package:ecommerce/view/widgets/container_under.dart';
 import 'package:ecommerce/view/widgets/text_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -67,7 +68,7 @@ class SignUpScreen extends StatelessWidget {
                     // name
                     AuthTextFromField(
                       textStyle: TextStyle(
-                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                        color: Get.isDarkMode ? pinkClr : mainColor,
                       ),
                       controller: nameController,
                       obscureText: false,
@@ -93,7 +94,7 @@ class SignUpScreen extends StatelessWidget {
                     // email
                     AuthTextFromField(
                       textStyle: TextStyle(
-                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                        color: Get.isDarkMode ? pinkClr : mainColor,
                       ),
                       controller: emailController,
                       obscureText: false,
@@ -118,13 +119,13 @@ class SignUpScreen extends StatelessWidget {
                     // phone
                     AuthTextFromField(
                       textStyle: TextStyle(
-                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                        color: Get.isDarkMode ? pinkClr : mainColor,
                       ),
                       controller: phoneController,
                       obscureText: false,
-                      prefixIcon:  Icon(
+                      prefixIcon: Icon(
                         Icons.phone_android_rounded,
-                        color: Get.isDarkMode? pinkClr:mainColor,
+                        color: Get.isDarkMode ? pinkClr : mainColor,
                         size: 30,
                       ),
                       suffixIcon: const Text(''),
@@ -143,7 +144,7 @@ class SignUpScreen extends StatelessWidget {
                     GetBuilder<AuthController>(builder: (_) {
                       return AuthTextFromField(
                         textStyle: TextStyle(
-                          color: Get.isDarkMode ? pinkClr: Colors.white,
+                          color: Get.isDarkMode ? pinkClr : mainColor,
                         ),
                         controller: passwordController,
                         obscureText: controller.isVisibility ? false : true,
@@ -170,7 +171,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         hintText: 'Password ',
                         validator: (value) {
-                          if (value.toString().length <= 6) {
+                          if (value.toString().length < 6) {
                             return 'Password should be longer or equal  to 6 characters';
                           } else {
                             return null;
@@ -182,9 +183,30 @@ class SignUpScreen extends StatelessWidget {
                     CheckWidget(),
                     const SizedBox(height: 20),
                     // buttom sigin up
-                    AuthButtom(
-                      text: "SIGN UP",
-                      onPressed: () {},
+                    GetBuilder<AuthController>(
+                      builder: (_) => AuthButtom(
+                        onPressed: () {
+                          if (controller.isCheckBox == false) {
+                            Get.snackbar(
+                              "Check Box",
+                              "Please, Accept terms & conditions",
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white,
+                            );
+                          } else if (formKey.currentState!.validate()) {
+                            controller.signUpUsingFirebase(
+                              name: (nameController.text).trim(),
+                              email: (emailController.text).trim(),
+                              password: passwordController.text,
+                              //phone:  phoneController.text.trim(),
+                            );
+                            controller.isCheckBox=true;
+                          }
+
+                        },
+                        text: "SIGN UP",
+                      ),
                     ),
                     const SizedBox(height: 20),
                   ],

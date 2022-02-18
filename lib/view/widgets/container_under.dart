@@ -27,8 +27,7 @@ class ContainerUnder extends StatelessWidget {
             borderRadius:const BorderRadius.only(
               topLeft: Radius.circular(20) ,
               topRight: Radius.circular(20) ,
-              bottomRight: Radius.circular(20) ,
-              bottomLeft: Radius.circular(20) ,
+
 
             ),
         ),

@@ -13,8 +13,8 @@ late SharedPreferences prefs;
 
 late String userToken;
 
-final String userId="";
-final String userName="";
-final String userPhone="";
-final String userEmail="";
-final String userImage="";
+final String user_Id="";
+final String user_Name="";
+final String user_Phone="";
+final String user_Email="";
+final String user_Image="";
