@@ -30,16 +30,16 @@ Future<bool> userLogin(String userMail, userPass) async {
 
     // store the user data in get storage using key and value
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString(userId, userData["user_id"]);
-    pref.setString(userName, userData["user_name"]);
-    pref.setString(userPhone, userData["user_phone"]);
-    pref.setString(userEmail, userData["user_email"]);
-    pref.setString(userImage, userData["user_image"]);
+    pref.setString(user_Id, userData["user_id"]);
+    pref.setString(user_Name, userData["user_name"]);
+    pref.setString(user_Phone, userData["user_phone"]);
+    pref.setString(user_Email, userData["user_email"]);
+    pref.setString(user_Image, userData["user_image"]);
 
     // after save we navigate to the main screen (home)
    // Get.toNamed(Routes.mainScreen);
     Get.offNamed(Routes.mainScreen);
-    controller.loading(false);
+
     print("user login success");
     return true;
   } else {

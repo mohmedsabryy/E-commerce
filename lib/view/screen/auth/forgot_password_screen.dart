@@ -1,4 +1,5 @@
 
+import 'package:ecommerce/logic/controllers/auth_controller.dart';
 import 'package:ecommerce/utils/my_string.dart';
 import 'package:ecommerce/utils/theme.dart';
 import 'package:ecommerce/view/widgets/authButtom.dart';
@@ -13,6 +14,7 @@ class ForgotPassword extends StatelessWidget {
   final TextEditingController emailController =TextEditingController() ;
   final formKey =GlobalKey<FormState>();
    ForgotPassword({Key? key}) : super(key: key);
+   final controller =Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +108,18 @@ class ForgotPassword extends StatelessWidget {
                 ) ,
                 const SizedBox(height: 50,),
 
-                AuthButtom(
-                  text: 'SEND',
-                  onPressed: (){},
+                GetBuilder<AuthController>(
+                  builder: (_){
+                    return AuthButtom(
+                      text: 'SEND',
+                      onPressed: (){
+                        if(formKey.currentState!.validate()){
+                          controller.resetPassword(email: emailController.text.trim());
+                        }
+                      },
+                    );
+                  },
+
                 ),
 
               ],

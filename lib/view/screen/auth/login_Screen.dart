@@ -23,19 +23,11 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void login() async {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      bool response =
-          await userLogin(emailController.text, passwordController.text);
-      controller.loading(response);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
-     
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -73,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                     // email
                     AuthTextFromField(
                       textStyle: TextStyle(
-                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                        color: Get.isDarkMode ? pinkClr : mainColor,
                       ),
                       controller: emailController,
                       obscureText: false,
@@ -99,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                     GetBuilder<AuthController>(builder: (_) {
                       return AuthTextFromField(
                         textStyle: TextStyle(
-                          color: Get.isDarkMode ? pinkClr: Colors.white,
+                          color: Get.isDarkMode ? pinkClr : mainColor,
                         ),
                         controller: passwordController,
                         //obscureText: true,
@@ -158,34 +150,21 @@ class LoginScreen extends StatelessWidget {
 
                     // buttom Login up
                     GetBuilder<AuthController>(
-                      builder: (_) => controller.isLoading
-                          ? const CircularProgressIndicator()
-                          : AuthButtom(
-                        text: "LOG IN",
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            login();
-                          }
-                        },
-                      ),
+                      builder: (_) {
+                        return AuthButtom(
+                          text: "LOG IN",
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              controller.loginUsingFirebase(
+                                email: emailController.text.trim(),
+                                password: passwordController.text,
+                              );
+                            }
+                          },
+                        );
+                      },
                     ),
-                  ],
-                ),
-              ),
-            ),
-            ContainerUnder(
-              onPressed: () {
-                Get.off(SignUpScreen());
-              },
-              text: "Don't have an account ? ",
-              textType: "Sign Up ",
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-/*
+                    SizedBox(height: 40),
                     TextUtils(
                       text: "OR",
                       fontsize: 18,
@@ -199,19 +178,40 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        InkWell(
-                          child: Image.asset('assets/images/facebook.png'),
-                          onTap: () {},
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        InkWell(
-                          child: Image.asset('assets/images/google.png'),
-                          onTap: () {},
+                        // InkWell(
+                        //   child: Image.asset('assets/images/facebook.png'),
+                        //   onTap: () {},
+                        // ),
+                        // const SizedBox(
+                        //   width: 30,
+                        // ),
+                        GetBuilder<AuthController>(
+                          builder: (_) {
+                            return InkWell(
+                              child: Image.asset('assets/images/google.png'),
+                              onTap: () {
+                                controller.googleSignUp();
+                              },
+                            );
+                          }
                         ),
                       ],
                     ),
-                     */
-//SizedBox(height: 40),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 40),
+            ContainerUnder(
+              onPressed: () {
+                Get.off(SignUpScreen());
+              },
+              text: "Don't have an account ? ",
+              textType: "Sign Up ",
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
