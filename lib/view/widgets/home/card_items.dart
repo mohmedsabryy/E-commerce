@@ -21,21 +21,19 @@ class CardItems extends StatelessWidget {
           color: Get.isDarkMode? pinkClr: mainColor,
         ));
       }else {
-        return  Expanded(
-          child: GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: controller.products.length,
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              childAspectRatio: screenWidth/screenHeight,
-              mainAxisSpacing: 9.0,
-              crossAxisSpacing: 6.0,
-              maxCrossAxisExtent: 200,
-            ),
-            itemBuilder: (context,index){
-              return buildCardItems(product: controller.products[index]);
-            },
+        return  GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: controller.products.length,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            childAspectRatio: screenWidth/screenHeight,
+            mainAxisSpacing: 9.0,
+            crossAxisSpacing: 6.0,
+            maxCrossAxisExtent: 200,
           ),
+          itemBuilder: (context,index){
+            return buildCardItems(product: controller.products[index]);
+          },
         );
       }
     });

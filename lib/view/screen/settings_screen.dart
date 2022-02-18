@@ -1,5 +1,7 @@
+import 'package:ecommerce/logic/controllers/auth_controller.dart';
 import 'package:ecommerce/logic/controllers/theme_controller.dart';
 import 'package:ecommerce/services/product_services.dart';
+import 'package:ecommerce/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,18 +43,42 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20.0),
-            Container(
-              color: Colors.grey,
-              child: TextButton(
-                onPressed: () {
-                  logout();
-                  //ThemeController().changesTheme();
-
-                },
-                child: Text(
-                  'Log out',
-                  style: TextStyle(
-                    color: Get.isDarkMode ? Colors.white : Colors.black,
+            GetBuilder<AuthController>(
+              builder:(controller)=> Container(
+                color: Colors.grey,
+                child: TextButton(
+                  onPressed: () {
+                    Get.defaultDialog(
+                      title: "Logout",
+                      titleStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                      middleText: " are you sure you need to logout ? ",
+                      middleTextStyle: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                      radius: 10,
+                      textCancel: " No ",
+                      textConfirm: " Yes ",
+                      cancelTextColor: Colors.black,
+                      confirmTextColor: Colors.black,
+                      onCancel: (){
+                        Get.back();
+                      },
+                      onConfirm: (){
+                        controller.signOut();
+                      },
+                      buttonColor: Get.isDarkMode? pinkClr:mainColor,
+                    );
+                  },
+                  child: Text(
+                    'Log out',
+                    style: TextStyle(
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
+                    ),
                   ),
                 ),
               ),

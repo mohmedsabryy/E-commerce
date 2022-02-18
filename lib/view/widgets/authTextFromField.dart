@@ -6,6 +6,7 @@ final bool obscureText ;
 final Function validator ;
 final Widget prefixIcon ;
 final Widget suffixIcon ;
+final TextStyle textStyle ;
 final String hintText ;
 
   const AuthTextFromField({
@@ -14,6 +15,7 @@ final String hintText ;
     required this.validator,
     required this.prefixIcon,
     required this.suffixIcon,
+    required this.textStyle,
     required this.hintText,
     Key? key,
   }) : super(key: key);
@@ -21,6 +23,7 @@ final String hintText ;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: textStyle,
       controller: controller,
       obscureText: obscureText,
       cursorColor: Colors.black,

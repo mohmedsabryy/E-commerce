@@ -32,10 +32,6 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       backgroundColor: context.theme.backgroundColor,
       body: SingleChildScrollView(
         child: Column(
@@ -70,6 +66,9 @@ class SignUpScreen extends StatelessWidget {
                     const SizedBox(height: 50),
                     // name
                     AuthTextFromField(
+                      textStyle: TextStyle(
+                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                      ),
                       controller: nameController,
                       obscureText: false,
                       prefixIcon: Get.isDarkMode
@@ -93,6 +92,9 @@ class SignUpScreen extends StatelessWidget {
                     const SizedBox(height: 30),
                     // email
                     AuthTextFromField(
+                      textStyle: TextStyle(
+                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                      ),
                       controller: emailController,
                       obscureText: false,
                       prefixIcon: Get.isDarkMode
@@ -113,14 +115,16 @@ class SignUpScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 30),
-
                     // phone
                     AuthTextFromField(
+                      textStyle: TextStyle(
+                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                      ),
                       controller: phoneController,
                       obscureText: false,
-                      prefixIcon: const Icon(
+                      prefixIcon:  Icon(
                         Icons.phone_android_rounded,
-                        color: mainColor,
+                        color: Get.isDarkMode? pinkClr:mainColor,
                         size: 30,
                       ),
                       suffixIcon: const Text(''),
@@ -138,6 +142,9 @@ class SignUpScreen extends StatelessWidget {
                     //password
                     GetBuilder<AuthController>(builder: (_) {
                       return AuthTextFromField(
+                        textStyle: TextStyle(
+                          color: Get.isDarkMode ? pinkClr: Colors.white,
+                        ),
                         controller: passwordController,
                         obscureText: controller.isVisibility ? false : true,
                         prefixIcon: Get.isDarkMode
@@ -184,7 +191,6 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             ContainerUnder(
               onPressed: () {
                 Get.toNamed(Routes.loginScreen);
