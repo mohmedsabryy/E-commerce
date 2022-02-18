@@ -10,7 +10,7 @@ import 'logic/bindings/main_binding.dart';
 import 'logic/controllers/theme_controller.dart';
 
 //comment
-
+//second test
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
