@@ -9,6 +9,8 @@ import 'package:get_storage/get_storage.dart';
 import 'logic/bindings/main_binding.dart';
 import 'logic/controllers/theme_controller.dart';
 
+//comment
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
