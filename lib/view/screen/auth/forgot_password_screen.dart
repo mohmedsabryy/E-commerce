@@ -18,6 +18,7 @@ class ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
         elevation: 0 ,
         backgroundColor:Get.isDarkMode ? darkGreyClr:Colors.white,
@@ -31,7 +32,7 @@ class ForgotPassword extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
               Icons.arrow_back,
-            color: Get.isDarkMode? Colors.black : Colors.white,
+            color: Get.isDarkMode?Colors.white: Colors.black ,
           ),
           onPressed: (){
             Get.back() ;
@@ -40,8 +41,6 @@ class ForgotPassword extends StatelessWidget {
         ),
 
       ),
-
-        backgroundColor: context.theme.backgroundColor,
 
         body: Form(
         key: formKey,
@@ -81,6 +80,7 @@ class ForgotPassword extends StatelessWidget {
                 ),
                 const SizedBox(height: 50,),
                 AuthTextFromField(
+                  textStyle: TextStyle(),
                   controller: emailController,
                   obscureText: false,
                   prefixIcon: Get.isDarkMode

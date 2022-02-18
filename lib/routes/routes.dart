@@ -14,6 +14,7 @@ import '../view/screen/settings_screen.dart';
 class AppRoutes{
   //initial rout
   static const welcome =Routes.welcomeScreen ;
+  static const mainScreen =Routes.mainScreen ;
 
   //get page
 

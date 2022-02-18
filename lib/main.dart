@@ -1,3 +1,4 @@
+import 'package:ecommerce/logic/controllers/auth_controller.dart';
 import 'package:ecommerce/routes/routes.dart';
 import 'package:ecommerce/utils/config.dart';
 import 'package:ecommerce/utils/theme.dart';
@@ -19,16 +20,16 @@ void main() async{
   //userToken =box.read(userId);
   // if the user token is null nav to login screen else nav to home screen
 
-  runApp(const MyApp());
+  runApp(MyApp());
 
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+   MyApp({Key? key}) : super(key: key);
+  //final controller = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
-
+     //var auth =GetStorage().read("auth");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false ,
       title: 'E Commerce ',
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemesApp.dark,
       themeMode: ThemeController().themeDataGet,
       initialRoute: AppRoutes.welcome,
+      //initialRoute:  controller.isSignIn ? AppRoutes.mainScreen:AppRoutes.welcome,
       getPages:AppRoutes.routes,
 
     );

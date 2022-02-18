@@ -34,11 +34,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       backgroundColor: context.theme.backgroundColor,
+     
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -49,6 +46,7 @@ class LoginScreen extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
+                    SizedBox(height: 20),
                     // // Text Sign UP
                     Row(
                       children: [
@@ -74,6 +72,9 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 50),
                     // email
                     AuthTextFromField(
+                      textStyle: TextStyle(
+                        color: Get.isDarkMode ? pinkClr: Colors.white,
+                      ),
                       controller: emailController,
                       obscureText: false,
                       prefixIcon: Get.isDarkMode
@@ -97,6 +98,9 @@ class LoginScreen extends StatelessWidget {
                     //password
                     GetBuilder<AuthController>(builder: (_) {
                       return AuthTextFromField(
+                        textStyle: TextStyle(
+                          color: Get.isDarkMode ? pinkClr: Colors.white,
+                        ),
                         controller: passwordController,
                         //obscureText: true,
                         obscureText: controller.isVisibility ? false : true,
@@ -154,7 +158,7 @@ class LoginScreen extends StatelessWidget {
 
                     // buttom Login up
                     GetBuilder<AuthController>(
-                      builder: (_) => controller.isLodaing
+                      builder: (_) => controller.isLoading
                           ? const CircularProgressIndicator()
                           : AuthButtom(
                         text: "LOG IN",
@@ -169,8 +173,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            //SizedBox(height: 70),
-
             ContainerUnder(
               onPressed: () {
                 Get.off(SignUpScreen());
@@ -183,7 +185,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-//SizedBox(height: 30),
 /*
                     TextUtils(
                       text: "OR",

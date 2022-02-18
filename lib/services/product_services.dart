@@ -13,22 +13,19 @@ class ProductServices{
 
     var response = await http.get(Uri.parse(url));
 
-     if (json.decode(response.body)["code"] == "200") {
+     print({response.statusCode});
+     if (response.statusCode==200) {
 
-       var productsData=json.decode(response.body)["message"];
        print("success");
-       print("product message => $productsData");
-       //ProductModel.fromJson(jsonData);
-      return productModelFromJson(productsData);
+       print("product data => ${response.body}");
+
+      return productModelFromJson(response.body);
      }
 
-     else if(json.decode(response.body)["message"] == "empty"){
-       print("there is no products ...");
-       return [];
-     }
      else {
        print("failed");
-       return throw Exception("Failed to load the products...");
+      return throw Exception("Failed to load the products...");
+       //return [];
      }
   }
 
