@@ -8,10 +8,10 @@ class ProductServices{
 
   static Future<List<ProductModel>> getAllProduct()async{
 
-//http://192.168.1.3/ecommerce/api/product/get_all_products.php?token=m
+      //http://192.168.1.3/ecommerce/api/product/get_all_products.php?token=m
      String url =apiPath + "product/get_all_products.php?token="+ token;
-
-    var response = await http.get(Uri.parse(url));
+      String myUrl="http://192.168.1.3/ecommerce/api/product/getAllProducts.php?token=m";
+    var response = await http.get(Uri.parse(myUrl));
 
      print({response.statusCode});
      if (response.statusCode==200) {

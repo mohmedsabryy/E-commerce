@@ -178,13 +178,7 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // InkWell(
-                        //   child: Image.asset('assets/images/facebook.png'),
-                        //   onTap: () {},
-                        // ),
-                        // const SizedBox(
-                        //   width: 30,
-                        // ),
+
                         GetBuilder<AuthController>(
                           builder: (_) {
                             return InkWell(

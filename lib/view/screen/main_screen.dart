@@ -1,13 +1,17 @@
+import 'package:badges/badges.dart';
 import 'package:ecommerce/logic/controllers/main_controller.dart';
+import 'package:ecommerce/routes/routes.dart';
 import 'package:ecommerce/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../routes/routes.dart';
+import '../../logic/controllers/cart_controller.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
   final controller = Get.find<MainController>();
+  final cartController = Get.find<CartController>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,12 +23,22 @@ class MainScreen extends StatelessWidget {
             backgroundColor: Get.isDarkMode ? darkGreyClr : mainColor,
             leading: Container(),
             actions: [
-              IconButton(
-                onPressed: () {
+              Obx((){
+                return Badge(
+                  position: BadgePosition.topEnd(top: 0, end: 3),
+                  animationDuration: const Duration(milliseconds: 300),
+                  animationType: BadgeAnimationType.slide,
+                  badgeContent: Text(
+                    cartController.quantity().toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  child: IconButton(
+                      icon: const Icon(Icons.shopping_cart), onPressed: () {
+                        Get.toNamed(Routes.cartScreen);
+                  }),
+                );
+              }),
 
-                },
-                icon: Image.asset('assets/images/shop.png'),
-              )
             ],
             title: Text(
               controller.title[controller.currentIndex.value],
@@ -36,13 +50,13 @@ class MainScreen extends StatelessWidget {
             currentIndex: controller.currentIndex.value,
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
-              controller.currentIndex.value=index;
+              controller.currentIndex.value = index;
             },
             items: [
               BottomNavigationBarItem(
                 activeIcon: Icon(
                   Icons.home,
-                  color: Get.isDarkMode ?pinkClr  : mainColor,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
                 ),
                 icon: Icon(
                   Icons.home,
@@ -53,7 +67,7 @@ class MainScreen extends StatelessWidget {
               BottomNavigationBarItem(
                 activeIcon: Icon(
                   Icons.category,
-                  color: Get.isDarkMode ?pinkClr  : mainColor,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
                 ),
                 icon: Icon(
                   Icons.category,
@@ -64,7 +78,7 @@ class MainScreen extends StatelessWidget {
               BottomNavigationBarItem(
                 activeIcon: Icon(
                   Icons.favorite,
-                  color: Get.isDarkMode ?pinkClr  : mainColor,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
                 ),
                 icon: Icon(
                   Icons.favorite,
@@ -75,7 +89,7 @@ class MainScreen extends StatelessWidget {
               BottomNavigationBarItem(
                 activeIcon: Icon(
                   Icons.settings,
-                  color: Get.isDarkMode ?pinkClr  : mainColor,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
                 ),
                 icon: Icon(
                   Icons.settings,
@@ -87,7 +101,7 @@ class MainScreen extends StatelessWidget {
           ),
           body: IndexedStack(
             index: controller.currentIndex.value,
-            children:controller.tabs.value,
+            children: controller.tabs.value,
           ),
         );
       }),

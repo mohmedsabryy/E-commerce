@@ -1,3 +1,4 @@
+import 'package:ecommerce/logic/controllers/cart_controller.dart';
 import 'package:ecommerce/logic/controllers/product_controller.dart';
 import 'package:ecommerce/models/products_models.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +10,15 @@ import '../text_utils.dart';
 class CardItems extends StatelessWidget {
    CardItems({Key? key}) : super(key: key);
 
-  final controller = Get.find<ProductController>();
+  final productController = Get.find<ProductController>();
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
     double screenWidth=MediaQuery.of(context).size.width;
     double screenHeight=MediaQuery.of(context).size.height;
     return Obx((){
-      if(controller.isLoading.value){
+      if(productController.isLoading.value){
         return  Center(child: CircularProgressIndicator(
           color: Get.isDarkMode? pinkClr: mainColor,
         ));
@@ -24,7 +26,7 @@ class CardItems extends StatelessWidget {
         return  GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: controller.products.length,
+          itemCount: productController.products.length,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             childAspectRatio: screenWidth/screenHeight,
             mainAxisSpacing: 9.0,
@@ -32,7 +34,7 @@ class CardItems extends StatelessWidget {
             maxCrossAxisExtent: 200,
           ),
           itemBuilder: (context,index){
-            return buildCardItems(product: controller.products[index]);
+            return buildCardItems(product: productController.products[index]);
           },
         );
       }
@@ -70,7 +72,9 @@ class CardItems extends StatelessWidget {
                     ),
                 ),
                 IconButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    cartController.addProductToCard(product);
+                  },
                   icon: Icon(
                     Icons.add_shopping_cart,
                     color: Colors.black,
