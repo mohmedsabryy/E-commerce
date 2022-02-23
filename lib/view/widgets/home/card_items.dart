@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/theme.dart';
+import '../../screen/product_details_screen.dart';
 import '../text_utils.dart';
 
 class CardItems extends StatelessWidget {
@@ -34,7 +35,14 @@ class CardItems extends StatelessWidget {
             maxCrossAxisExtent: 200,
           ),
           itemBuilder: (context,index){
-            return buildCardItems(product: productController.products[index]);
+            return buildCardItems(
+                product: productController.products[index],
+                onTap: (){
+                  Get.to(()=>ProductDetailsScreen(
+                    productModels: productController.products[index],
+                  ));
+                }
+                );
           },
         );
       }
@@ -43,9 +51,12 @@ class CardItems extends StatelessWidget {
 
   Widget buildCardItems({
   required ProductModel product,
+    required Function() onTap,
 }){
     return Padding(
       padding: const EdgeInsets.all(5.0),
+      child: InkWell(
+        onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
@@ -148,6 +159,7 @@ class CardItems extends StatelessWidget {
             ),
           ],
         ) ,
+      ),
       ),
     );
   }
