@@ -1,54 +1,64 @@
-import 'package:ecommerce/view/widgets/text_utils.dart';
+import 'package:ecommerce/logic/controllers/product_controller.dart';
+import 'package:ecommerce/models/products_models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({Key? key}) : super(key: key);
+  FavoritesScreen({Key? key}) : super(key: key);
+  final controller = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       SizedBox(
-      //         height: 100,
-      //         width: 100,
-      //         child: Image.asset('assets/images/heart.png'),
-      //       ),
-      //       SizedBox(
-      //         height: 20,
-      //       ),
-      //       Text(
-      //         'Please, Add your favourite products',
-      //         style: TextStyle(
-      //           fontWeight: FontWeight.bold,
-      //           fontSize: 17,
-      //           color: Get.isDarkMode ? Colors.white : Colors.black,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      body: ListView.separated(
-          itemBuilder: (context,index){
-            return buildFavItems();
-          },
-          separatorBuilder:(context,index){
-            return Divider(
-              color: Colors.grey,
-              thickness: 1,
+
+      body: Obx(
+        () {
+          if (controller.favorites.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: Image.asset('assets/images/heart.png'),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Please, Add your favourite products',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ],
+              ),
             );
-          },
-          itemCount: 10,
+          }
+          else {
+            return ListView.separated(
+              itemBuilder: (context,index){
+                return buildFavItems(controller.favorites[index]);
+              },
+              separatorBuilder:(context,index){
+                return Divider(
+                  color: Colors.grey,
+                  thickness: 1,
+                );
+              },
+              itemCount: controller.favorites.length,
+            );
+          }
+        },
       ),
     );
   }
 
-
-  Widget buildFavItems(){
+  Widget buildFavItems(ProductModel model) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: SizedBox(
@@ -64,10 +74,10 @@ class FavoritesScreen extends StatelessWidget {
                 ),
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child:Image.network(
-                      'https://images.unsplash.com/photo-1644895986468-ddcc385751a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
-                    fit:BoxFit.cover ,
-                  ) ,
+                  child: Image.network(
+                    model.productImage,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -81,7 +91,7 @@ class FavoritesScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Title TitleTitleTitleTitleTitleTitleTitleTitlevvv',
+                    model.productName,
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -93,7 +103,7 @@ class FavoritesScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    '\$100',
+                    '\$${ model.productPrice.toString()}',
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -106,14 +116,15 @@ class FavoritesScreen extends StatelessWidget {
             ),
             const Spacer(),
             IconButton(
-                onPressed: (){},
-                icon: Icon(
-                  Icons.favorite ,
-                  color: Colors.red,
-                  size: 30,
-                ),
+              onPressed: () {
+                controller.manageFavorites(model.productId);
+              },
+              icon: Icon(
+                Icons.favorite,
+                color: Colors.red,
+                size: 30,
+              ),
             ),
-
           ],
         ),
       ),
