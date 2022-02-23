@@ -72,27 +72,34 @@ class CardItems extends StatelessWidget {
         ),
         child:Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: (){},
-                    icon: Icon(
-                      Icons.favorite_outline,
-                      color: Colors.black,
+            Obx(()=>
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: (){
+                        productController.manageFavorites(product.productId);
+                      },
+                      icon:productController.isFavorite(product.productId)?
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      ):Icon(
+                        Icons.favorite_outline,
+                        color: Colors.black,
+                      ),
                     ),
-                ),
-                IconButton(
-                  onPressed: (){
-                    cartController.addProductToCard(product);
-                  },
-                  icon: Icon(
-                    Icons.add_shopping_cart,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
+                    IconButton(
+                      onPressed: (){
+                        cartController.addProductToCard(product);
+                      },
+                      icon: Icon(
+                        Icons.add_shopping_cart,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),),
             Container(
               width: double.infinity,
               height: 140,

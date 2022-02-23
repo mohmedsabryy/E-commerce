@@ -10,9 +10,9 @@ class ProductServices{
 List<ProductModel> products;
 //http://192.168.1.3/ecommerce/api/product/get_all_products.php?token=m
      String url =apiPath + "product/get_all_products.php?token="+ token;
-     String myurl="http://192.168.1.7//ecommerce/api/product/getAllProducts.php?token=m";
+     String myUrl="http://192.168.1.3/ecommerce/api/product/getAllProducts.php?token=m";
 
-    var response = await http.get(Uri.parse(url));
+    var response = await http.get(Uri.parse(myUrl));
 
      print({response.statusCode});
      if (response.statusCode==200) {
