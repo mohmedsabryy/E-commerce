@@ -8,7 +8,7 @@ import 'package:get_storage/get_storage.dart';
 
 import 'logic/bindings/main_binding.dart';
 import 'logic/controllers/theme_controller.dart';
-
+//
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
