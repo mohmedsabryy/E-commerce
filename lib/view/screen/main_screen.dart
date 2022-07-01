@@ -41,7 +41,7 @@ class MainScreen extends StatelessWidget {
 
             ],
             title: Text(
-              controller.title[controller.currentIndex.value],
+              controller.title[controller.currentIndex.value].tr,
             ),
             centerTitle: true,
           ),

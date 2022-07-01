@@ -89,7 +89,7 @@ class CartProductCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "$quantity",
+                      "$quantity".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Get.isDarkMode ? Colors.white : Colors.black,
