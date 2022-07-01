@@ -14,7 +14,7 @@ class SettingController extends GetxController
     return profileName.split(" ").map((name) => name.capitalize).join(" ");
   }
 
-  //Language
+  //llLanguage
   @override
   void onInit() async {
     super.onInit();
