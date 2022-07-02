@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../utils/my_string.dart';
-
 class SettingController extends GetxController
 {
   var swithchValue = false.obs;
@@ -14,7 +13,7 @@ class SettingController extends GetxController
     return profileName.split(" ").map((name) => name.capitalize).join(" ");
   }
 
-  //llLanguage
+  //Language
   @override
   void onInit() async {
     super.onInit();
