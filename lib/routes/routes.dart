@@ -5,6 +5,7 @@ import 'package:ecommerce/view/screen/auth/login_Screen.dart';
 import 'package:ecommerce/view/screen/auth/singup_screen.dart';
 import 'package:ecommerce/view/screen/favorites_screen.dart';
 import 'package:ecommerce/view/screen/main_screen.dart';
+import 'package:ecommerce/view/screen/payment_screen.dart';
 import 'package:ecommerce/view/screen/welcome_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import '../logic/bindings/product_binding.dart';
@@ -16,6 +17,9 @@ class AppRoutes{
   //initial rout
   static const welcome =Routes.welcomeScreen ;
   static const mainScreen =Routes.mainScreen ;
+  static const paymentScreen =Routes.paymentScreen ;
+
+
 
   //get page
 
@@ -90,6 +94,17 @@ class AppRoutes{
         ProductBinding(),
       ],
     ),
+
+    //paymentScreen
+    GetPage(
+      name: Routes.paymentScreen,
+      page:()=>   PaymentScreen() ,
+      bindings: [
+        AuthBinding(),
+        MainBinding(),
+        ProductBinding(),
+      ],
+    ),
   ];
 }
 
@@ -104,6 +119,7 @@ class Routes{
   static const settingScreen ='/settingScreen' ;
   static const categoryScreen ='/categoryScreen' ;
   static const cartScreen ="/cartScreen";
+  static const paymentScreen ="/paymentScreen";
 
 
 

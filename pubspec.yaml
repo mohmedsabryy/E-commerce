@@ -48,6 +48,8 @@ dependencies:
   carousel_slider: ^4.0.0
   readmore: ^2.1.0
   flutter_rating_bar: ^4.0.0
+  geolocator: ^9.0.0
+  geocoding: ^2.0.4
 
 dev_dependencies:
   flutter_test:
