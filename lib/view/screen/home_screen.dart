@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextUtils(
-                            text: 'Find Your',
+                            text: 'Find Your'.tr,
                             fontsize: 25,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                           height: 5,
                         ),
                         TextUtils(
-                          text: 'INSPIRATION',
+                          text: 'INSPIRATION'.tr,
                           fontsize: 28,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: TextUtils(
-                      text: 'Categories',
+                      text: 'Categories'.tr,
                       fontsize: 20,
                       fontWeight: FontWeight.w500,
                       color: Get.isDarkMode ? Colors.white : Colors.black ,

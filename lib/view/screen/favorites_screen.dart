@@ -28,7 +28,7 @@ class FavoritesScreen extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    'Please, Add your favourite products',
+                    'Please, Add your favourite products'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 17,

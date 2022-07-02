@@ -25,11 +25,11 @@ class DarkModeWidget extends StatelessWidget {
         Switch(
           activeTrackColor:Get.isDarkMode?pinkClr:mainColor ,
           activeColor: mainColor,
-          value: controller.switchValue.value,
+          value: controller.swithchValue.value,
           onChanged: (value){
 
             ThemeController().changesTheme();
-            controller.switchValue.value=value;
+            controller.swithchValue.value=value;
 
 
           },
@@ -59,7 +59,7 @@ class DarkModeWidget extends StatelessWidget {
             width: 20,
           ),
           TextUtils(
-              text: "Dark Mode",
+              text: "Dark Mode".tr,
               fontsize: 22,
               fontWeight: FontWeight.bold,
               color: Get.isDarkMode?Colors.white:Colors.black,

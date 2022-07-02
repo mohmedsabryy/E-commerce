@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../widgets/setting/dark_mode_widget.dart';
+import '../widgets/setting/language_widget.dart';
+import '../widgets/setting/logout_widget.dart';
+import '../widgets/setting/profile_widget.dart';
 
 // import '../../routes/routes.dart';
 // import '../../utils/config.dart';
@@ -97,7 +100,7 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         padding:  EdgeInsets.all(24),
         children:  [
-          //ProfilImage(),
+          ProfileWidget(),
           const SizedBox(
             height: 10,
           ),
@@ -110,7 +113,7 @@ class SettingsScreen extends StatelessWidget {
             height: 20,
           ),
            TextUtils(
-              text: "GENERAL",
+              text: "GENERAL".tr,
               fontsize: 18,
               fontWeight: FontWeight.bold,
               color:Get.isDarkMode?pinkClr: mainColor,
@@ -123,12 +126,15 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          //LanguageWidget(),
+          LanguageWidget(),
           const SizedBox(
             height: 20,
           ),
-          //LogOutWidget(),
-
+          LogOutWidget(),
+          const SizedBox(
+            height: 20,
+          ),
+         // LanguageWidget(),
 
 
 

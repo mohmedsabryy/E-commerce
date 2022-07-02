@@ -20,15 +20,21 @@ class AuthController extends GetxController {
 
 
  late UserModel user ;
- var userName;
- var userImage;
+ var userName=''.obs;
+ var userImage='';
+ var useremail;
 
   var defaultUserImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8czzbrLzXJ9R_uhKyMiwj1iGxKhJtH7pwlQ&usqp=CAU";
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
   final GetStorage authBox = GetStorage();
-
+@override
+  // void onInit() {
+  //   // TODO: implement onInit
+  //   googleSignUp();
+  //   super.onInit();
+  // }
   void visibility() {
     isVisibility = !isVisibility;
     update();
@@ -55,8 +61,9 @@ class AuthController extends GetxController {
         password: password,
       )
           .then((value) {
-            userName=name;
+        userName.value=name;
         auth.currentUser?.updateDisplayName(name);
+
         //auth.currentUser?.updatePhoneNumber(userPhone);
         auth.currentUser?.updatePhotoURL(defaultUserImageUrl);
         // user.id = auth.currentUser!.uid;
@@ -116,8 +123,8 @@ class AuthController extends GetxController {
         password: password,
       ).then((value) {
         // user.id=auth.currentUser!.uid;
-        // user.name = auth.currentUser!.displayName!;
-        // user.email= email;
+         userName.value = auth.currentUser!.displayName!;
+         //user.email= email;
         // user.password = password;
         // user.image = auth.currentUser!.photoURL!;
         //userPhone=auth.currentUser!.phoneNumber!;
@@ -164,8 +171,16 @@ class AuthController extends GetxController {
   void googleSignUp() async{
     try{
       final GoogleSignInAccount? googleAccount= await GoogleSignIn().signIn();
-      userName = googleAccount?.displayName;
-      userImage = googleAccount?.photoUrl;
+      userName.value = googleAccount!.displayName!;
+      userImage = googleAccount.photoUrl!;
+   //   useremail=googleAccount?.email;
+      GoogleSignInAuthentication googleSignInAuthentication=
+      await googleAccount.authentication;
+      final AuthCredential credential=GoogleAuthProvider.credential(
+        idToken:googleSignInAuthentication.idToken,
+        accessToken:googleSignInAuthentication.accessToken,
+      );
+      await auth.signInWithCredential(credential);
       isSignIn=true;
       authBox.write("auth", isSignIn);
       update();
@@ -238,7 +253,7 @@ class AuthController extends GetxController {
       authBox.remove("auth");
       await auth.signOut();
       await GoogleSignIn().signOut();
-      userName="";
+      userName.value="";
       userImage="";
       authBox.remove("auth");
       isSignIn=false;
