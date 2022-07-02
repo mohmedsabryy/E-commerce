@@ -15,6 +15,7 @@ import '../../routes/routes.dart';
 class AuthController extends GetxController {
   bool isVisibility = false;
   bool isCheckBox = false;
+  var displayUserName = ''.obs;
   bool isLoading = false;
   bool isSignIn = false;
 
