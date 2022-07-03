@@ -11,6 +11,7 @@ class ProductController extends GetxController {
   var isLoading = true.obs;
   var storage = GetStorage();
 
+
   @override
   void onInit() {
     super.onInit();
@@ -18,7 +19,10 @@ class ProductController extends GetxController {
 
     List? favList = storage.read<List>("isFavoritesList");
     if (favList != null) {
-      favorites = favList.map((e) => ProductModel.fromJson(e)).toList().obs;
+      favorites = favList
+          .map((e) => ProductModel.fromJson(e))
+          .toList()
+          .obs;
     }
   }
 
