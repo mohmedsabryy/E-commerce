@@ -16,6 +16,8 @@ class AuthController extends GetxController {
   bool isVisibility = false;
   bool isCheckBox = false;
   var displayUserName = ''.obs;
+  var displayUserEmail = ''.obs;
+  var displayUserPhoto = ''.obs;
   bool isLoading = false;
   bool isSignIn = false;
 
@@ -30,12 +32,17 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   final GetStorage authBox = GetStorage();
+  User? get userProfiloe => auth.currentUser;
 @override
-  // void onInit() {
-  //   // TODO: implement onInit
-  //   googleSignUp();
-  //   super.onInit();
-  // }
+  void onInit() {
+    // TODO: implement onInit
+  displayUserName.value =
+  (userProfiloe != null ? userProfiloe!.displayName : "")!;
+  displayUserEmail.value = (userProfiloe != null ? userProfiloe!.email : "")!;
+  displayUserPhoto.value =
+  (userProfiloe != null ? userProfiloe!.photoURL : "")!;
+  super.onInit();
+  }
   void visibility() {
     isVisibility = !isVisibility;
     update();

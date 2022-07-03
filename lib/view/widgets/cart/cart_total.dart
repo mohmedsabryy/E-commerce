@@ -31,7 +31,7 @@ class CartTotal extends StatelessWidget {
                       underline: TextDecoration.none,
                     ),
                     Text(
-                      "\$${controller.totalPrice}",
+                      "\$${controller.totalPrice.toStringAsFixed(controller.totalPrice.truncateToDouble() == controller.totalPrice ? 1 : 2)}",
                       style: TextStyle(
                         color: Get.isDarkMode ? Colors.white : Colors.black,
                         fontSize: 20,
@@ -56,7 +56,6 @@ class CartTotal extends StatelessWidget {
                         primary: Get.isDarkMode ? pinkClr : mainColor,
                       ),
                       onPressed: () {
-                        print("payment screen");
                         Get.toNamed(Routes.paymentScreen);
                       },
                       child: Row(
