@@ -6,7 +6,7 @@ import '../../services/category_services.dart';
 
 class CategoryController extends GetxController {
   var categoryNameList = <String>[].obs;
-  var categoryList = <ProductModel>[].obs;
+  var categoryList = <ProductModels>[].obs;
    var isCatgeoryLoading = false.obs;
   var isAllCategory = false.obs;
 

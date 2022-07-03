@@ -7,7 +7,7 @@ import '../../utils/theme.dart';
 class CartController extends GetxController {
   var productsMap = {}.obs;
 
-  void addProductToCard(ProductModel model) {
+  void addProductToCard(ProductModels model) {
     if (productsMap.containsKey(model)) {
       productsMap[model] += 1;
     } else {
@@ -23,11 +23,11 @@ class CartController extends GetxController {
     );
   }
 
-  void removeProductFromCard(ProductModel model) {
+  void removeProductFromCard(ProductModels model) {
     productsMap.removeWhere((key, value) => key == model);
   }
 
-  void removeOneProductFromCard(ProductModel model) {
+  void removeOneProductFromCard(ProductModels model) {
     if (productsMap.containsKey(model) && productsMap[model] == 1) {
       productsMap.removeWhere((key, value) => key == model);
     } else {
@@ -65,7 +65,7 @@ class CartController extends GetxController {
   }
 
   get totalPrice => productsMap.entries
-      .map((e) => double.parse(e.key.productPrice) * e.value)
+      .map((e) => e.key.price * e.value)
       .toList()
       .reduce((value, element) => value + element);
 

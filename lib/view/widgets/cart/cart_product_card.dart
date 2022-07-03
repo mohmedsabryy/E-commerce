@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../../logic/controllers/cart_controller.dart';
 
 class CartProductCard extends StatelessWidget {
-  final ProductModel model;
+  final ProductModels model;
   final int quantity;
 
   CartProductCard({
@@ -40,20 +40,20 @@ class CartProductCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   image: NetworkImage(
-                    model.productImage,
+                    model.image,
                   ),
                   fit: BoxFit.contain,
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.productName,
+                    model.title,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -63,7 +63,7 @@ class CartProductCard extends StatelessWidget {
                     maxLines: 2,
                   ),
                   Text(
-                    "\$${quantity * double.parse(model.productPrice)}",
+                    "\$${quantity * model.price}",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Get.isDarkMode ? Colors.white : Colors.black,

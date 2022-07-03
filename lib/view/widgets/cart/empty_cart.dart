@@ -1,5 +1,4 @@
 import 'package:ecommerce/utils/theme.dart';
-import 'package:ecommerce/view/screen/payment_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,7 +64,8 @@ class EmptyCart extends StatelessWidget {
                 primary: Get.isDarkMode ? pinkClr : mainColor,
               ),
               onPressed: () {
-                Get.toNamed(Routes.paymentScreen);
+
+                Get.toNamed(Routes.mainScreen);
               },
               child:const Text(
                 " Go To Home ",

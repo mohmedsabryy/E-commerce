@@ -18,13 +18,13 @@ class CategoryServices {
 }
 
 class AllCategorySercvises {
-  static Future<List<ProductModel>> getAllCatehory(String categoryNames) async {
+  static Future<List<ProductModels>> getAllCatehory(String categoryNames) async {
     var response =
     await http.get(Uri.parse('$baseUrl/products/category/$categoryNames'));
 
     if (response.statusCode == 200) {
       var jsonData = response.body;
-      return productModelFromJson(jsonData);
+      return productModelsFromJson(jsonData);
     } else {
       return throw Exception("Failed to load product");
     }

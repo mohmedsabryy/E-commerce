@@ -8,7 +8,7 @@ import '../widgets/ProductDetails/image_sliders.dart';
 import '../widgets/ProductDetails/size_list.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final ProductModel productModels;
+  final ProductModels productModels;
 
   const ProductDetailsScreen({required this.productModels, Key? key})
       : super(key: key);
@@ -22,18 +22,18 @@ class ProductDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ImageSlider(
-              imageurl: productModels.productImage,
+              imageurl: productModels.image,
             ),
             ClothesInfo(
-              title: productModels.productName,
-              rate: productModels.productRate.toString(),
-              descreption: productModels.productDesc,
+              title: productModels.title,
+              rate: productModels.rating.rate.toString(),
+              descreption: productModels.description,
             ),
-            if (productModels.categoryId == '1' ||
-                productModels.categoryId == '2')
+            if (productModels.category == '1' ||
+                productModels.category == '2')
               SizeList(),
             AddCart(
-              price: double.parse(productModels.productPrice),
+              price: productModels.price,
               productModels: productModels,
             ),
           ],
