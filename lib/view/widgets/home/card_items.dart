@@ -28,7 +28,9 @@ class CardItems extends StatelessWidget {
         return GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: productController.products.length,
+          itemCount: productController.searchList.isEmpty
+              ? productController.products.length
+              : productController.searchList.length,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             childAspectRatio: screenWidth / screenHeight,
             mainAxisSpacing: 9.0,
@@ -36,13 +38,27 @@ class CardItems extends StatelessWidget {
             maxCrossAxisExtent: 200,
           ),
           itemBuilder: (context, index) {
-            return buildCardItems(
-                product: productController.products[index],
-                onTap: () {
-                   Get.to(()=>ProductDetailsScreen(
-                     productModels: productController.products[index],
-                   ),);
-                });
+            if (productController.searchList.isEmpty) {
+              return buildCardItems(
+                  product: productController.products[index],
+                  onTap: () {
+                    Get.to(
+                      () => ProductDetailsScreen(
+                        productModels: productController.products[index],
+                      ),
+                    );
+                  });
+            } else {
+              return buildCardItems(
+                  product: productController.searchList[index],
+                  onTap: () {
+                    Get.to(
+                      () => ProductDetailsScreen(
+                        productModels: productController.searchList[index],
+                      ),
+                    );
+                  });
+            }
           },
         );
       }
