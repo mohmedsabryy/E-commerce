@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../logic/controllers/cart_controller.dart';
+import '../../../routes/routes.dart';
 
 class CartTotal extends StatelessWidget {
   CartTotal({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class CartTotal extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextUtils(
+                    const TextUtils(
                       text: "Total",
                       fontsize: 16,
                       fontWeight: FontWeight.bold,
@@ -40,7 +41,7 @@ class CartTotal extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Expanded(
@@ -54,10 +55,13 @@ class CartTotal extends StatelessWidget {
                         elevation: 0,
                         primary: Get.isDarkMode ? pinkClr : mainColor,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        print("payment screen");
+                        Get.toNamed(Routes.paymentScreen);
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children:const  [
                           Text(
                             "Check Out",
                             style: TextStyle(

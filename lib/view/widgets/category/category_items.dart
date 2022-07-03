@@ -48,13 +48,14 @@ class CategoryItems extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return buildCardItems(
-                  image: categoryController.categoryList[index].productImage,
-                  price: categoryController.categoryList[index].productPrice,
-                  rate: categoryController.categoryList[index].productRate,
-                  productId: categoryController.categoryList[index].productId,
+                  image: categoryController.categoryList[index].image,
+                  price: categoryController.categoryList[index].price,
+                  rate: categoryController.categoryList[index].rating.rate,
+                  productId: categoryController.categoryList[index].id,
                   productModels: categoryController.categoryList[index],
                   onTap: () {
                     Get.to(() => ProductDetailsScreen(
+                      //productModels: categoryController.categoryList[index],
                       productModels: categoryController.categoryList[index],
                     )
                     );
@@ -71,7 +72,7 @@ class CategoryItems extends StatelessWidget {
     required double price,
     required double rate,
     required int productId,
-    required ProductModel productModels,
+    required ProductModels productModels,
     required Function() onTap,
   }) {
     return Padding(

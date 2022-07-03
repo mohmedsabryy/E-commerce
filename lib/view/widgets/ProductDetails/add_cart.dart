@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class AddCart extends StatelessWidget {
   final double price;
-  final ProductModel productModels;
+  final ProductModels productModels;
    AddCart({
    required this.price,
     required this.productModels,

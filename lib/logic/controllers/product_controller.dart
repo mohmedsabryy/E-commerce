@@ -6,8 +6,8 @@ import 'package:get_storage/get_storage.dart';
 
 class ProductController extends GetxController {
   //.obs for stream data
-  var products = <ProductModel>[].obs;
-  var favorites = <ProductModel>[].obs;
+  var products = <ProductModels>[].obs;
+  var favorites = <ProductModels>[].obs;
   var isLoading = true.obs;
   var storage = GetStorage();
 
@@ -20,7 +20,7 @@ class ProductController extends GetxController {
     List? favList = storage.read<List>("isFavoritesList");
     if (favList != null) {
       favorites = favList
-          .map((e) => ProductModel.fromJson(e))
+          .map((e) => ProductModels.fromJson(e))
           .toList()
           .obs;
     }
@@ -28,7 +28,6 @@ class ProductController extends GetxController {
 
   void getProducts() async {
     var allProducts = await ProductServices.getAllProduct();
-
     try {
       isLoading(true);
       if (allProducts.isNotEmpty) {
@@ -40,18 +39,18 @@ class ProductController extends GetxController {
   }
 
   void manageFavorites(var _id) async {
-    int index = favorites.indexWhere((element) => element.productId == _id);
+    int index = favorites.indexWhere((element) => element.id == _id);
     if (index >= 0) {
       favorites.removeAt(index);
       await storage.remove("isFavoritesList");
     } else {
-      var _model = products.firstWhere((element) => element.productId == _id);
+      var _model = products.firstWhere((element) => element.id == _id);
       favorites.add(_model);
       await storage.write("isFavoritesList", favorites);
     }
   }
 
   bool isFavorite(var _id) {
-    return favorites.any((element) => element.productId == _id);
+    return favorites.any((element) => element.id == _id);
   }
 }

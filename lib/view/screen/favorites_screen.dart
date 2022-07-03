@@ -24,7 +24,7 @@ class FavoritesScreen extends StatelessWidget {
                     width: 100,
                     child: Image.asset('assets/images/heart.png'),
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -45,7 +45,7 @@ class FavoritesScreen extends StatelessWidget {
                 return buildFavItems(controller.favorites[index]);
               },
               separatorBuilder:(context,index){
-                return Divider(
+                return const Divider(
                   color: Colors.grey,
                   thickness: 1,
                 );
@@ -58,7 +58,7 @@ class FavoritesScreen extends StatelessWidget {
     );
   }
 
-  Widget buildFavItems(ProductModel model) {
+  Widget buildFavItems(ProductModels model) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: SizedBox(
@@ -75,7 +75,7 @@ class FavoritesScreen extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 1,
                   child: Image.network(
-                    model.productImage,
+                    model.image,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -91,7 +91,7 @@ class FavoritesScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.productName,
+                    model.title,
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -99,11 +99,11 @@ class FavoritesScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    '\$${ model.productPrice.toString()}',
+                    '\$${ model.price.toString()}',
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Get.isDarkMode ? Colors.white : Colors.black,
@@ -117,9 +117,9 @@ class FavoritesScreen extends StatelessWidget {
             const Spacer(),
             IconButton(
               onPressed: () {
-                controller.manageFavorites(model.productId);
+                controller.manageFavorites(model.id);
               },
-              icon: Icon(
+              icon:const Icon(
                 Icons.favorite,
                 color: Colors.red,
                 size: 30,
