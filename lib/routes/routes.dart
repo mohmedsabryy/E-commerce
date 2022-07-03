@@ -17,7 +17,7 @@ class AppRoutes{
   //initial rout
   static const welcome =Routes.welcomeScreen ;
   static const mainScreen =Routes.mainScreen ;
-  static const paymentScreen =Routes.paymentScreen ;
+  static const productDetailsScreen =Routes.productDetailsScreen ;
 
 
 
@@ -120,6 +120,7 @@ class Routes{
   static const categoryScreen ='/categoryScreen' ;
   static const cartScreen ="/cartScreen";
   static const paymentScreen ="/paymentScreen";
+  static const productDetailsScreen="/productDetailsScreen";
 
 
 

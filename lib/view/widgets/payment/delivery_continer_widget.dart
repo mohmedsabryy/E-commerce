@@ -212,7 +212,13 @@ class _DeliveryContinerWidgetState extends State<DeliveryContinerWidget> {
                 ),
                 Row(
                   children: [
-                    const Text('🇪🇬+02 '),
+                     Text('🇪🇬+20 ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
                     TextUtils(
                       text: phone,
                       fontsize: 15,

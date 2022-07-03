@@ -16,7 +16,7 @@ class PayMentController extends GetxController {
 
     Placemark place = placemarks[0];
 
-    address.value = "${place.country},${place.street}";
+    address.value = "${place.country},${place.locality}";
   }
 
   Future<Position> _determinePosition() async {
