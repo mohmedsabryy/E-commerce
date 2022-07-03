@@ -46,7 +46,7 @@ class _DeliveryContinerWidgetState extends State<DeliveryContinerWidget> {
         Obx(
               () => buildRadioContiner(
             address: controller.address.value,
-            name: "mohamed sabry",
+            name: authController.displayUserName.value,
             phone: controller.phoneNumber.value,
             title: "Delivery",
             value: 2,
